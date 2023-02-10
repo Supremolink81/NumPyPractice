@@ -58,3 +58,7 @@ print(data[..., indexes])
 print(data[indexes, :])
 circle_angles = np.linspace(0, 2*np.pi, 1000)
 print(np.sin(circle_angles))
+
+# Stacking
+print(np.vstack((np.ones(data.shape), data, np.ones(data.shape))))
+print(np.hstack((np.zeros(data.shape), data, np.zeros(data.shape))))
