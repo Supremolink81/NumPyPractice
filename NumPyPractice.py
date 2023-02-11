@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+import matplotlib.pyplot as plt
 np.set_printoptions(threshold = sys.maxsize)
 
 # Playground to experiment with NumPy and its capabilities
@@ -52,13 +53,33 @@ print("Fortran Order:")
 for i in np.nditer(data, order = 'F'):
     print(i)
 
-# Ranges and linspaces
+# Ranges, linspaces and slicing
 indexes = np.arange(0, 7, 2)
 print(data[..., indexes])
 print(data[indexes, :])
 circle_angles = np.linspace(0, 2*np.pi, 1000)
 print(np.sin(circle_angles))
+print(data[2:9, 3:6])
 
 # Stacking
 print(np.vstack((np.ones(data.shape), data, np.ones(data.shape))))
 print(np.hstack((np.zeros(data.shape), data, np.zeros(data.shape))))
+
+# Splitting
+print(np.split(data, [2, 5, 7], axis=1))
+print(np.split(data, [4, 10, 17], axis=0))
+
+# Flipping
+print(np.flip(data, axis = 0))
+print(np.flip(data, axis = 1))
+print(np.flip(data))
+
+# Stats operations
+counts, bins = np.histogram(data)
+print(counts)
+_ = plt.hist(bins[:-1], bins, weights=counts)
+plt.title("Test Histogram")
+plt.show()
+bins = [0.0, 2.0, 3.5, 5.5, 8.0, 9.0, 10.5]
+print(np.digitize(data, bins))
+print(f"Mean : {data.mean()}, Std : {data.std()}")
